@@ -1,4 +1,4 @@
-# webworkerify
+# webworkify
 
 launch a web worker that can require() in the browser with browserify
 
@@ -7,7 +7,7 @@ launch a web worker that can require() in the browser with browserify
 First, a `main.js` file will launch the `worker.js` and print its output:
 
 ``` js
-var work = require('webworkerify');
+var work = require('webworkify');
 
 var w = work(require('./worker.js'));
 w.addEventListener('message', function (ev) {
@@ -46,7 +46,7 @@ contain output from the worker:
 # methods
 
 ``` js
-var work = require('webworkerify')
+var work = require('webworkify')
 ```
 
 ## var w = work(require(modulePath))
@@ -69,7 +69,7 @@ output.
 With [npm](https://npmjs.org) do:
 
 ```
-npm install webworkerify
+npm install webworkify
 ```
 
 # license
