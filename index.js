@@ -25,7 +25,7 @@ module.exports = function (fn) {
             wcache[key] = key;
         }
         sources[wkey] = [
-            Function(['require','module','exports'], '(' + fn + ')()'),
+            Function(['require','module','exports'], '(' + fn + ')(self)'),
             wcache
         ];
     }
@@ -33,7 +33,7 @@ module.exports = function (fn) {
     
     var scache = {}; scache[wkey] = wkey;
     sources[skey] = [
-        Function(['require'],'require(' + stringify(wkey) + ')()'),
+        Function(['require'],'require(' + stringify(wkey) + ')(self)'),
         scache
     ];
     
