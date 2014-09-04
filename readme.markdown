@@ -13,6 +13,8 @@ var w = work(require('./worker.js'));
 w.addEventListener('message', function (ev) {
     console.log(ev.data);
 });
+//passing data '4'
+w.postMessage(4);
 ```
 
 then `worker.js` can `require()` modules of its own. The worker function lives
@@ -21,11 +23,15 @@ inside of the `module.exports`:
 ``` js
 var gamma = require('gamma');
 
-module.exports = function () {
-    setInterval(function () {
-        var r = 1 / Math.random() - 1;
-        postMessage([ r, gamma(r) ]);
-    }, 500);
+module.exports = function (self) {
+    self.addEventListener('message',function(oEvent){
+        //reciveing data
+        var startNum = parseInt(oEvent.data);
+        setInterval(function () {
+                var r = startNum / Math.random() - 1;
+                self.postMessage([startNum, r, gamma(r) ]);//post result
+        }, 500);        
+    });    
 };
 ```
 
@@ -33,13 +39,13 @@ Now after [browserifying](http://browserify.org) this example, the console will
 contain output from the worker:
 
 ```
-[ 0.09162078520553618, 10.421030346237066 ]
-[ 2.026562457360466, 1.011522336481017 ]
-[ 3.1853125018703716, 2.3887589540750214 ]
-[ 5.6989969260510005, 72.40768854476167 ]
-[ 8.679491643020487, 20427.19357947782 ]
-[ 0.8528139834191428, 1.1098187157762498 ]
-[ 8.068322137547542, 5785.928308309402 ]
+[ 4, 0.09162078520553618, 10.421030346237066 ]
+[ 4, 2.026562457360466, 1.011522336481017 ]
+[ 4, 3.1853125018703716, 2.3887589540750214 ]
+[ 4, 5.6989969260510005, 72.40768854476167 ]
+[ 4, 8.679491643020487, 20427.19357947782 ]
+[ 4, 0.8528139834191428, 1.1098187157762498 ]
+[ 4, 8.068322137547542, 5785.928308309402 ]
 ...
 ```
 

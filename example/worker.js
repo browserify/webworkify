@@ -1,8 +1,20 @@
 var gamma = require('gamma');
 
-module.exports = function () {
-    setInterval(function () {
-        var r = 1 / Math.random() - 1;
-        postMessage([ r, gamma(r) ]);
-    }, 500);
+module.exports = function (self) {
+
+    self.addEventListener('message',function(oEvent){
+        //reciveing data
+        var startNum = parseInt(oEvent.data);
+
+
+
+        setInterval(function () {
+            var r = startNum / Math.random() - 1;
+            self.postMessage([startNum, r, gamma(r) ]);
+        }, 500);
+
+
+    });
+
+
 };
