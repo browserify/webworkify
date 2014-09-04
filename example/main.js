@@ -5,5 +5,4 @@ w.addEventListener('message', function (ev) {
     console.log(ev.data);
 });
 
-//passing data
-w.postMessage(4);
+w.postMessage(4); // send the worker a message

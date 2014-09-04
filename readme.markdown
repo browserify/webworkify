@@ -13,8 +13,8 @@ var w = work(require('./worker.js'));
 w.addEventListener('message', function (ev) {
     console.log(ev.data);
 });
-//passing data '4'
-w.postMessage(4);
+
+w.postMessage(4); // send the worker a message
 ```
 
 then `worker.js` can `require()` modules of its own. The worker function lives
@@ -24,14 +24,14 @@ inside of the `module.exports`:
 var gamma = require('gamma');
 
 module.exports = function (self) {
-    self.addEventListener('message',function(oEvent){
-        //reciveing data
-        var startNum = parseInt(oEvent.data);
+    self.addEventListener('message',function (ev){
+        var startNum = parseInt(ev.data); // ev.data=4 from main.js
+        
         setInterval(function () {
-                var r = startNum / Math.random() - 1;
-                self.postMessage([startNum, r, gamma(r) ]);//post result
-        }, 500);        
-    });    
+            var r = startNum / Math.random() - 1;
+            self.postMessage([ startNum, r, gamma(r) ]);
+        }, 500);
+    });
 };
 ```
 
