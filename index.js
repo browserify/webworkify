@@ -3,6 +3,7 @@ var sources = arguments[4];
 var cache = arguments[5];
 
 var stringify = JSON.stringify;
+var URL = window.URL || window.webkitURL;
 
 module.exports = function (fn) {
     var keys = [];
@@ -46,7 +47,7 @@ module.exports = function (fn) {
         }).join(',')
         + '},{},[' + stringify(skey) + '])'
     ;
-    return new Worker(window.URL.createObjectURL(
+    return new Worker(URL.createObjectURL(
         new Blob([src], { type: 'text/javascript' })
     ));
 };
