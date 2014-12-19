@@ -3,7 +3,7 @@ var sources = arguments[4];
 var cache = arguments[5];
 
 var stringify = JSON.stringify;
-var URL = window.URL || window.webkitURL;
+var URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
 
 module.exports = function (fn) {
     var keys = [];
