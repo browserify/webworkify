@@ -3,7 +3,6 @@ var sources = arguments[4];
 var cache = arguments[5];
 
 var stringify = JSON.stringify;
-var URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
 
 module.exports = function (fn) {
     var keys = [];
@@ -47,6 +46,9 @@ module.exports = function (fn) {
         }).join(',')
         + '},{},[' + stringify(skey) + '])'
     ;
+    
+    var URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
+    
     return new Worker(URL.createObjectURL(
         new Blob([src], { type: 'text/javascript' })
     ));
