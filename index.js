@@ -49,7 +49,10 @@ module.exports = function (fn) {
     
     var URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
     
-    return new Worker(URL.createObjectURL(
-        new Blob([src], { type: 'text/javascript' })
-    ));
+    var workerUrl = URL.createObjectURL(
+      new Blob([src], { type: 'text/javascript' })
+    );
+    var worker = new Worker(workerUrl);
+    URL.revokeObjectURL(workerUrl);
+    return worker;
 };
