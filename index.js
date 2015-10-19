@@ -53,6 +53,8 @@ module.exports = function (fn) {
       new Blob([src], { type: 'text/javascript' })
     );
     var worker = new Worker(workerUrl);
-    URL.revokeObjectURL(workerUrl);
+    if (typeof URL.revokeObjectURL == "function") {
+      URL.revokeObjectURL(workerUrl);
+    }
     return worker;
 };
