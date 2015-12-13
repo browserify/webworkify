@@ -11,7 +11,8 @@ module.exports = function (fn) {
     
     for (var i = 0, l = cacheKeys.length; i < l; i++) {
         var key = cacheKeys[i];
-        if (cache[key].exports === fn) {
+        var exp = cache[key].exports;
+        if (exp === fn || exp.__esModule && exp.default === fn) {
             wkey = key;
             break;
         }
@@ -33,7 +34,11 @@ module.exports = function (fn) {
     
     var scache = {}; scache[wkey] = wkey;
     sources[skey] = [
-        Function(['require'],'require(' + stringify(wkey) + ')(self)'),
+        Function(['require'], (
+            'var mod = require(' + stringify(wkey) + ');' +
+            'var isFn = typeof mod !== "function";' +
+            '(mod.__esModule && isFn ? mod.default : mod)(self)'
+        )),
         scache
     ];
     
