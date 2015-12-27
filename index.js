@@ -1,5 +1,5 @@
-var bundleFn = arguments[3];
-var sources = arguments[4];
+var bundleFn = arguments[3] || (function() {});
+var sources = arguments[4] || {};
 var cache = arguments[5] || {};
 
 var stringify = JSON.stringify;
