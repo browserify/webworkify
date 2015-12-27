@@ -1,6 +1,6 @@
 var bundleFn = arguments[3];
 var sources = arguments[4];
-var cache = arguments[5];
+var cache = arguments[5] || {};
 
 var stringify = JSON.stringify;
 
