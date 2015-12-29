@@ -1,6 +1,6 @@
 {
   "name": "webworkify",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "launch a web worker that can require() in the browser with browserify",
   "main": "index.js",
   "dependencies": {},
