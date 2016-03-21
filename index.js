@@ -16,7 +16,7 @@ module.exports = function (fn) {
         // be an object with the default export as a property of it. To ensure
         // the existing api and babel esmodule exports are both supported we
         // check for both
-        if (exp === fn || exp.default === fn) {
+        if (exp === fn || exp && exp.default === fn) {
             wkey = key;
             break;
         }
