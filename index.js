@@ -59,5 +59,11 @@ module.exports = function (fn, options) {
     var URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
 
     var blob = new Blob([src], { type: 'text/javascript' });
-    return (options && options.bare) ? blob : new Worker(URL.createObjectURL(blob));
+    if (options && options.bare) { return blob; }
+    var workerUrl = URL.createObjectURL(blob);
+    var worker = new Worker(workerUrl);
+    if (typeof URL.revokeObjectURL == "function") {
+      URL.revokeObjectURL(workerUrl);
+    }
+    return worker;
 };
