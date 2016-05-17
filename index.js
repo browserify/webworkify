@@ -4,7 +4,7 @@ var cache = arguments[5];
 
 var stringify = JSON.stringify;
 
-module.exports = function (fn) {
+module.exports = function (fn, options) {
     var keys = [];
     var wkey;
     var cacheKeys = Object.keys(cache);
@@ -59,7 +59,6 @@ module.exports = function (fn) {
 
     var URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
 
-    return new Worker(URL.createObjectURL(
-        new Blob([src], { type: 'text/javascript' })
-    ));
+    var blob = new Blob([src], { type: 'text/javascript' });
+    return (options && options.bare) ? blob : new Worker(URL.createObjectURL(blob));
 };
