@@ -5,7 +5,6 @@ var cache = arguments[5];
 var stringify = JSON.stringify;
 
 module.exports = function (fn, options) {
-    var keys = [];
     var wkey;
     var cacheKeys = Object.keys(cache);
 
