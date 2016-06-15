@@ -62,8 +62,6 @@ module.exports = function (fn, options) {
     if (options && options.bare) { return blob; }
     var workerUrl = URL.createObjectURL(blob);
     var worker = new Worker(workerUrl);
-    if (typeof URL.revokeObjectURL == "function") {
-      URL.revokeObjectURL(workerUrl);
-    }
+    worker.objectURL = workerUrl;
     return worker;
 };

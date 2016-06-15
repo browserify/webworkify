@@ -70,6 +70,12 @@ part. It is necessary for the main code to `require()` the worker code to fetch
 the module reference and load `modulePath`'s dependency graph into the bundle
 output.
 
+## Worker.objectURL
+
+The worker `w` returned by `webworkify` has the property `objectURL` attached.
+`w.objectURL` refers to the Object URL that was used to pass the module's source
+to the worker, and can be cleaned up using `URL.revokeObjectURL()`.  (See [example](https://github.com/substack/webworkify/blob/master/example/main.js))
+
 # install
 
 With [npm](https://npmjs.org) do:
