@@ -29,7 +29,7 @@ module.exports = function (fn, options) {
             wcache[key] = key;
         }
         sources[wkey] = [
-            Function(['require','module','exports'], '(' + fn + ')(self)'),
+            'function(require,module,exports){' + fn + '(self); }',
             wcache
         ];
     }
@@ -37,12 +37,11 @@ module.exports = function (fn, options) {
 
     var scache = {}; scache[wkey] = wkey;
     sources[skey] = [
-        Function(['require'], (
-            // try to call default if defined to also support babel esmodule
-            // exports
+        'function(require,module,exports){' +
+            // try to call default if defined to also support babel esmodule exports
             'var f = require(' + stringify(wkey) + ');' +
-            '(f.default ? f.default : f)(self);'
-        )),
+            '(f.default ? f.default : f)(self);' +
+        '}',
         scache
     ];
 
