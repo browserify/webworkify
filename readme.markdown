@@ -55,7 +55,7 @@ contain output from the worker:
 var work = require('webworkify')
 ```
 
-## var w = work(require(modulePath))
+## var w = work(require(modulePath) [, options])
 
 Return a new
 [web worker](https://developer.mozilla.org/en-US/docs/Web/API/Worker)
@@ -75,6 +75,9 @@ output.
 The worker `w` returned by `webworkify` has the property `objectURL` attached.
 `w.objectURL` refers to the Object URL that was used to pass the module's source
 to the worker, and can be cleaned up using `URL.revokeObjectURL()`.  (See [example](https://github.com/substack/webworkify/blob/master/example/main.js))
+
+### options
+- bare - the return value will be the blob constructed with the worker's code and not the web worker itself.
 
 # install
 
