@@ -76,7 +76,8 @@ output.
   - name - the name of the worker thread to be assigned
   - type - the type of worker to create; `classic` or `module`; The default is `classic`
  The full list of options is [here](https://developer.mozilla.org/en-US/docs/Web/API/Worker/Worker)
- **Important note: ** if the option `bare` is used, the other options will be ignored. Pass these options in a javascript object. 
+ 
+ **Important note:** if the option `bare` is used, the other options will be ignored. Pass these options in a javascript object. 
 
 ## Worker.objectURL
 
