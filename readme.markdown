@@ -55,7 +55,7 @@ contain output from the worker:
 var work = require('webworkify')
 ```
 
-## var w = work(require(modulePath))
+## var w = work(require(modulePath), [options])
 
 Return a new
 [web worker](https://developer.mozilla.org/en-US/docs/Web/API/Worker)
@@ -69,6 +69,15 @@ the main thread too so don't put any computationally intensive code in that
 part. It is necessary for the main code to `require()` the worker code to fetch
 the module reference and load `modulePath`'s dependency graph into the bundle
 output.
+
+### Options
+
+  - bare - the return value will be the blob constructed with the worker's code and not the web worker itself.
+  - name - the name of the worker thread to be assigned
+  - type - the type of worker to create; `classic` or `module`; The default is `classic`
+ The full list of options is [here](https://developer.mozilla.org/en-US/docs/Web/API/Worker/Worker)
+ 
+ **Important note:** if the option `bare` is used, the other options will be ignored. Pass these options in a javascript object. 
 
 ## Worker.objectURL
 
